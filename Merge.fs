@@ -1,42 +1,32 @@
-// splitList the input list
-let splitList divSize lst = 
-  let rec splitAcc divSize cont = function
-    | [] -> cont([],[])
-    | l when divSize = 0 -> cont([], l)
-    | h::t -> splitAcc (divSize-1) (fun acc -> cont(h::fst acc, snd acc)) t
-  splitAcc divSize (fun x -> x) lst
+let take n list = 
+    List.ofSeq <| Seq.take n list
 
-// merge two sub-lists
-let merge l r =
-  let rec mergeCont cont l r = 
-    match l, r with
-    | l, [] -> cont l
-    | [], r -> cont r
-    | hl::tl, hr::tr ->
-      if hl<hr then mergeCont (fun acc -> cont(hl::acc)) tl r
-      else mergeCont (fun acc -> cont(hr::acc)) l tr
-  mergeCont (fun x -> x) l r
+let rec takeRest n list = 
+    match (n, list) with
+    | (0, l) -> l
+    | (n, _ :: tl) -> takeRest (n - 1) tl
+    | (_, _) -> failwith "unknown pattern"
 
-// Sorting via merge
-let mergeSort lst = 
-  let rec mergeSortCont lst cont =
-    match lst with
-    | [] -> cont([])
-    | [x] -> cont([x])
-    | l -> let left, right = splitList (l.Length/2) l
-           mergeSortCont left  (fun accLeft ->
-           mergeSortCont right (fun accRight -> cont(merge accLeft accRight)))
-  mergeSortCont lst (fun x -> x)
+let rec mergeList list1 list2 =
+    match (list1, list2) with
+    | [], [] -> []
+    | [], l -> l
+    | l, [] -> l
+    | hd1 :: tl1, (hd2 :: _ as tl2) when hd1 < hd2 -> hd1 ::  mergeList tl1 tl2
+    | l1, hd2 :: tl2 -> hd2 :: mergeList l1 tl2
 
-// create a random list
-let testlist = [ 5; 4; 3; 2; 1; ]
+let rec mergeSort = function
+    | [] -> [] 
+    | [x] -> [x]
+    | l -> 
+        let n = (int)(List.length l / 2)        
+        let list1 = mergeSort (take n l)
+        let list2 = mergeSort (takeRest n l)
+        mergeList list1 list2
 
-// result:
-let res = mergeSort testlist
 
-let printlist lst =
-    lst |> Seq.iter (fun x -> printf "%d " x)
-    printf "\n"
-    
-printlist testlist
-printlist res
+[<EntryPoint>]
+let main args = 
+    let input = [10; 7; 1; 0; -1; 9; 33; 12; 6; 2; 3; 33; 34;];
+    List.iter (fun x -> printfn "%i" x) (mergeSort input)
+    0
