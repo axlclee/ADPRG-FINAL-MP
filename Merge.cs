@@ -57,8 +57,25 @@ public class Program
 	
 	public static void Main()
 	{
-		int [] testValues = new int [10] {100,10,56,896,145,4512,16456,1,568,115615};
+		int [] testValues = new int [1000000];
+		var recwatch = new System.Diagnostics.Stopwatch();
+		var rand = new Random();
 
-		MergeSort(testValues, 0, testValues.Length - 1);
+		// do this 10000 times
+		for (int h = 0; h < 10000; h++)
+		{
+			// generate 1000000 random digits
+			for (int i = 0; i < testValues.Length; i++)
+			{
+				testValues[i] = rand.Next(1000001);
+			}
+
+			recwatch = new System.Diagnostics.Stopwatch();
+			// record the time
+			recwatch.Start();
+			MergeSort(testValues, 0, testValues.Length - 1);
+			recwatch.Stop();
+			Console.WriteLine("Execution Time: " + recwatch.ElapsedMilliseconds + " ms");
+		}
 	}
 }
