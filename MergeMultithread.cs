@@ -54,8 +54,8 @@ public class Program
 		var recwatch = new System.Diagnostics.Stopwatch();
 		var rand = new Random();
 
-		// do this 10000 times
-		for (int h = 0; h < 10000; h++)
+		// do this 1000 times
+		for (int h = 0; h < 1000; h++)
 		{
 			// generate 1000000 random digits
 			for (int i = 0; i < testValues.Length; i++)
