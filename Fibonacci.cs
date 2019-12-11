@@ -30,19 +30,20 @@ public class Fib
 	
 	public static void Main()
 	{
+		for(int i = 1; i<=40; i++){
 			var recwatch = new System.Diagnostics.Stopwatch(); //stopwatch to measure execution time
 			recwatch.Start();
-			Console.WriteLine("Using Recursion: 10th digit = " + FibonacciRec(10));
+			Console.WriteLine("Using Recursion - digit "+ i +" = " + FibonacciRec(i));
 			recwatch.Stop();
 			Console.WriteLine("Execution Time: " + recwatch.ElapsedMilliseconds + "ms");
 
 
 			var watch = new System.Diagnostics.Stopwatch();
 			watch.Start();
-			Console.WriteLine("Using Divide and Conquer: 10th digit = " + Fibonacci(10));
+			Console.WriteLine("Using Divide and Conquer - digit "+ i +" = " + Fibonacci(i));
 			watch.Stop();
 			Console.WriteLine("Execution Time: " + watch.ElapsedMilliseconds + "ms");
-		
-
-
+		}
 	}
+
+}

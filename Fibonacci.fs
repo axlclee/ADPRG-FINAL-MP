@@ -23,15 +23,16 @@ let rec fibonacciRec n: int =
 
 let main =
 
-  let recwatch = new System.Diagnostics.Stopwatch()//stopwatch to measure execution time
-  recwatch.Start()
-  Console.WriteLine("Using Recursion: 10th digit = {0}",fibonacciRec(10))
-  recwatch.Stop()
-  Console.WriteLine("Execution Time: {0} ms" ,recwatch.ElapsedMilliseconds)
+  for i = 1 to 40 do
+    let recwatch = new System.Diagnostics.Stopwatch()//stopwatch to measure execution time
+    recwatch.Start()
+    Console.WriteLine("Using Recursion -  digit {0} = {1}",i,fibonacciRec(i))
+    recwatch.Stop()
+    Console.WriteLine("Execution Time: {0} ms" ,recwatch.ElapsedMilliseconds)
 
 
-  let watch = new System.Diagnostics.Stopwatch()
-  watch.Start()
-  Console.WriteLine("Using Divide and Conquer:  10th digit = {0}",fibonacci(10))
-  watch.Stop()
-  Console.WriteLine("Execution Time: {0} ms" ,watch.ElapsedMilliseconds )
+    let watch = new System.Diagnostics.Stopwatch()
+    watch.Start()
+    Console.WriteLine("Using Divide and Conquer - digit {0} = {1}",i,fibonacci(i))
+    watch.Stop()
+    Console.WriteLine("Execution Time: {0} ms" ,watch.ElapsedMilliseconds )
