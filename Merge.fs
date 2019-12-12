@@ -1,3 +1,5 @@
+open System
+
 // takes the first n from a list
 let take n list = 
     List.ofSeq <| Seq.take n list
@@ -36,8 +38,18 @@ let rec mergeSort = function
         // then merge
         mergeList list1 list2
 
+
+let genRandomNumbers count =
+    let rnd = System.Random()
+    List.init count (fun _ -> rnd.Next (1000001))
+
 [<EntryPoint>]
 let main args = 
-    let input = [10; 7; 1; 0; -1; 9; 33; 12; 6; 2; 3; 33; 34;];
-    List.iter (fun x -> printfn "%i" x) (mergeSort input)
+    for i = 1 to 50 do
+        let input = genRandomNumbers 10000
+        let watch = new System.Diagnostics.Stopwatch()
+        watch.Start()
+        let result = mergeSort input
+        watch.Stop()
+        Console.WriteLine("{0}" , watch.ElapsedMilliseconds)
     0

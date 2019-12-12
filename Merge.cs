@@ -57,12 +57,12 @@ public class Program
 	
 	public static void Main()
 	{
-		int [] testValues = new int [1000000];
+		int [] testValues = new int [10000];
 		var recwatch = new System.Diagnostics.Stopwatch();
 		var rand = new Random();
 
 		// do this 1000 times
-		for (int h = 0; h < 1000; h++)
+		for (int h = 0; h < 50; h++)
 		{
 			// generate 1000000 random digits
 			for (int i = 0; i < testValues.Length; i++)
@@ -75,7 +75,7 @@ public class Program
 			recwatch.Start();
 			MergeSort(testValues, 0, testValues.Length - 1);
 			recwatch.Stop();
-			Console.WriteLine("Execution Time: " + recwatch.ElapsedMilliseconds + " ms");
+			Console.WriteLine(recwatch.ElapsedMilliseconds);
 		}
 	}
 }
